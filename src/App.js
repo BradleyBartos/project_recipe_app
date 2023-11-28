@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./App.css";
 import RecipeCreate from "./RecipeCreate";
 import RecipeList from "./RecipeList";
@@ -6,20 +6,14 @@ import RecipeData from "./RecipeData"
 
 function App() {
   const [recipes, setRecipes] = useState(RecipeData.map(recipe => {return {id: generateKey(), ...recipe}}));
+
   function handleNewRecipe (recipeData) {
     setRecipes([...recipes, {id: generateKey(), ...recipeData}]);
   };
-  const handleDeletion = async (indexToDelete) => {
-    console.log('Before deletion')
-    console.log(recipes)
-    setRecipes(recipes.filter((recipe, index) => index !== indexToDelete));
-    setTimeout(() => {
-      console.log('After deletion');
-      console.log(recipes);
-    }, 10)
+
+  const handleDeletion = (id) => {
+    setRecipes(recipes.filter((recipe) => recipe.id !== id));
   };
-  console.log('App load')
-  console.log(recipes)
   
   return (
     <div className="App">
@@ -33,8 +27,9 @@ function App() {
 /**
  * Function for generating ids to use in table keys
  */
-const generateKey = () => {
-  return (Math.random() * Date.now()).toFixed().toString();
+export const generateKey = () => {
+  const id = (Math.random() * Date.now()).toFixed().toString();
+  return id;
 }
 
 export default App;

@@ -3,11 +3,10 @@ import { emptyRecipe } from "./RecipeData";
 
 function RecipeDisplay({ 
   recipe = {...emptyRecipe}, 
-  index = 0,
   handleDeletion 
 }) {
   // handle button
-  const handleDeleteClick = () => handleDeletion(index);
+  const handleDeleteClick = () => handleDeletion(recipe.id);
 
   return recipe == null ? null : 
     <tr>

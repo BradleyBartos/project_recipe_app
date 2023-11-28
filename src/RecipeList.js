@@ -9,7 +9,7 @@ function RecipeList({
     <div className="recipe-list">
       <table>
         <thead>
-          <tr key='header'>
+          <tr>
             <th>Name</th>
             <th>Cuisine</th>
             <th>Photo</th>
@@ -22,9 +22,8 @@ function RecipeList({
           {list.map((recipe, index) => 
             <RecipeDisplay 
               recipe={recipe} 
-              index={index} 
               handleDeletion={handleDeletion} 
-              key={recipe.id} 
+              key={index} 
             />
           )}
         </tbody>
